@@ -1,5 +1,5 @@
-CREATE SCHEMA HOTELS;
-CREATE TABLE HOTEL(id INT IDENTITY PRIMARY KEY NOT NULL,address VARCHAR(255),city VARCHAR(50),name VARCHAR(50),zip VARCHAR(25));
+-- CREATE SCHEMA HOTELS;
+-- CREATE TABLE HOTEL(id INT IDENTITY PRIMARY KEY NOT NULL,address VARCHAR(255),city VARCHAR(50),name VARCHAR(50),zip VARCHAR(25));
 --
 -- Sample dataset containing a number of Hotels in various Cities across the world.
 --

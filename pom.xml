@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <start-class>edu.wctc.spring.boot.rest.demo1.app.SampleDataRestApplication</start-class>
+        <start-class>edu.wctc.spring.boot.rest.demo1.SampleDataRestApplication</start-class>
     </properties>
     
     <dependencies>

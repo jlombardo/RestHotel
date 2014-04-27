@@ -88,7 +88,7 @@ function findByName(searchKey) {
     console.log('findByName: ' + searchKey);
     $.ajax({
         type: 'GET',
-        url: rootURL + '/search/' + searchKey,
+        url: rootURL + '/search/findByNameContaining?name=' + searchKey,
         dataType: "json",
         success: renderList
     });
@@ -110,7 +110,7 @@ function findById(self) {
 }
 
 function addHotel() {
-    console.log('addHotel');
+    console.log(formToJSON());
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
@@ -120,10 +120,21 @@ function addHotel() {
         success: function(data, textStatus, jqXHR) {
             alert('Hotel created successfully');
             $('#btnDelete').show();
-            $('#hotelId').val(data.id);
+            //$('#hotelId').val(data.id);
+            findAll();
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert('addHotel error: ' + textStatus);
+            console.log(jqXHR.status);
+            // Fix a bug in JQuery
+            if (jqXHR.status === 201) {
+                alert('Hotel created successfully');
+                $('#btnDelete').show();
+                //$('#hotelId').val(data.id);
+                findAll();
+            }
+            else {
+                alert('addHotel error: ' + textStatus);
+            }
         }
     });
 }
@@ -131,18 +142,20 @@ function addHotel() {
 function updateHotel() {
     console.log('updateHotel');
     $.ajax({
-        type: 'PUT',
+        type: 'PATCH',
         contentType: 'application/json',
         url: rootURL + '/' + $('#hotelId').val(),
-        dataType: "json",
+        contentType: "application/json",
         data: formToJSON(),
         success: function(data, textStatus, jqXHR) {
             alert('Hotel updated successfully');
+            findAll();            
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert('updateHotel error: ' + textStatus);
         }
     });
+
 }
 
 function deleteHotel() {
@@ -152,6 +165,7 @@ function deleteHotel() {
         url: rootURL + '/' + $('#hotelId').val(),
         success: function(data, textStatus, jqXHR) {
             alert('Hotel deleted successfully');
+            findAll();            
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert('deleteHotel error');
@@ -159,11 +173,15 @@ function deleteHotel() {
     });
 }
 
-function renderDetails(hotel) {
-	var id = hotel._links.self.href;
-        var idx = id.lastIndexOf("/");
-        id = id.substring(idx+1);
-        $('#hotelId').val(id);
+function renderDetails(hotel) {	
+        if(hotel.name === undefined) {
+            $('#hotelId').val(hotel.id);
+        } else {
+            var id = hotel._links.self.href;
+            var idx = id.lastIndexOf("/");
+            id = id.substring(idx+1);
+            $('#hotelId').val(id);
+        }
 	$('#name').val(hotel.name);
 	$('#address').val(hotel.address);
 	$('#city').val(hotel.city);
@@ -172,12 +190,10 @@ function renderDetails(hotel) {
 
 // Helper function to serialize all the form fields into a JSON string
 function formToJSON() {
-	var hotelId = $('#hotelId').val();
 	return JSON.stringify({
-		"id": hotelId == "" ? null : hotelId, 
-		"name": $('#name').val(), 
 		"address": $('#address').val(),
 		"city": $('#city').val(),
+		"name": $('#name').val(), 
 		"zip": $('#zip').val(),
 		});
 }
