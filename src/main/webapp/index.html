@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>RESTful Web Service Demo :: Hotels</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css" /> 
+    </head>
+    <body>
+        <h1>Hotel Manager</h1>
+
+        <div class="header">
+            <input type="text" id="searchKey"/>
+            <button id="btnSearch">Search</button>
+            <button id="btnAdd">New Hotel</button>
+        </div>
+
+        <div class="leftArea">
+            <ul id="hotelList"></ul>
+        </div>
+
+        <form id="hotelForm">
+
+            <div class="mainArea">
+
+                <label>Id:</label>
+                <input id="hotelId" name="hotelId" type="text" disabled />
+
+                <label>Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label>Grapes:</label>
+                <input type="text" id="address" name="address"/>
+
+                <label>Country:</label>
+                <input type="text" id="city" name="city"/>
+
+                <label>Region:</label>
+                <input type="text" id="zip" name="zip"/>
+
+                <button id="btnSave">Save</button>
+                <button id="btnDelete">Delete</button>
+
+            </div>
+
+            <div class="rightArea">
+
+                <img id="pic" height="300"/>
+
+                <label>Notes:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
+        </form>
+
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
