@@ -25,33 +25,15 @@ import javax.persistence.Id;
 @Entity
 public class Hotel implements Serializable {
 
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 6L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String city;
     private String name;
     private String address;
     private String zip;
-
-    protected Hotel() {
-    }
-
-    public Hotel(String city, String name, String address, String zip) {
-        this.city = city;
-        this.name = name;
-        this.address = address;
-        this.zip = zip;
-    }
-
-    public Hotel(Long id, String name, String city, String address, String zip) {
-        this.id = id;
-        this.city = city;
-        this.name = name;
-        this.address = address;
-        this.zip = zip;
-    }
 
     public String getCity() {
         return this.city;
@@ -85,18 +67,18 @@ public class Hotel implements Serializable {
         return this.zip;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + (this.id != null ? this.id.hashCode() : 0);
+        int hash = 5;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -109,11 +91,12 @@ public class Hotel implements Serializable {
             return false;
         }
         final Hotel other = (Hotel) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {
