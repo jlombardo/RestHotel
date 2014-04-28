@@ -1,7 +1,15 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This is the client-side logic for connecting to RESTful Web Services on 
+ * the server-side via the HotelRepository class.
+ * 
+ * This code is heavily dependent on JQuery 2.x as well as the HATEOAS 
+ * implementation of REST provided by Spring. Despite this fact all client-
+ * side code is language and server framework agnostic. Any server-side
+ * framework that can deliver RESTful, HATEOAS style web services can be used.
+ * 
+ * References:
+ * - Wikipedia: http://en.wikipedia.org/wiki/HATEOS
+ * - Spring HATEOAS: https://github.com/spring-projects/spring-hateoas/blob/master/readme.md
  */
 
 // The root URL for the RESTful services
@@ -125,7 +133,7 @@ function addHotel() {
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.status);
-            // Fix a bug in JQuery
+            // Fix a bug in JQuery: 201 means the insert succeeded!
             if (jqXHR.status === 201) {
                 alert('Hotel created successfully');
                 $('#btnDelete').show();
@@ -145,7 +153,7 @@ function updateHotel() {
         type: 'PATCH',
         contentType: 'application/json',
         url: rootURL + '/' + $('#hotelId').val(),
-        contentType: "application/json",
+        dataType: "html",
         data: formToJSON(),
         success: function(data, textStatus, jqXHR) {
             alert('Hotel updated successfully');

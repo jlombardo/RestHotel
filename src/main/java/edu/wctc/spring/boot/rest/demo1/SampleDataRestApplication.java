@@ -8,6 +8,14 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
+/**
+ * This is how Spring Boot starts an application, in this case a
+ * web application that uses Spring Data and JPA to automatically create
+ * all the C.R.U.D. operations and map them to RESTful endpoints. See
+ * the HotelRepository class under the service package.
+ * 
+ * @author Jim Lombardo
+ */
 @Configuration
 @ComponentScan
 @EnableJpaRepositories

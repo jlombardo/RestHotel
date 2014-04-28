@@ -10,7 +10,7 @@
 .leftArea {
 	position: absolute;
 	left: 10px;
-	top: 110px;
+	top: 140px;
 	bottom: 20px;
 	width: 260px;
 	border:solid 1px #CCCCCC;
@@ -19,7 +19,7 @@
 
 .mainArea {
 	position: absolute;
-	top: 110px;
+	top: 140px;
 	bottom: 20px;
 	left:300px;
 	overflow-y: scroll;
@@ -28,7 +28,7 @@
 
 .rightArea {
 	position: absolute;
-	top: 110px;
+	top: 140px;
 	bottom: 20px;
 	left:650px;
 	overflow-y: scroll;
@@ -85,3 +85,9 @@ button {
 #searchKey {
 	width:160px;
 }
+
+.apiHead {
+    font-size: large;
+    font-weight: bold;
+}
+

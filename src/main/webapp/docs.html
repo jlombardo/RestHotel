@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+    Here is the documentation for the REST API
+-->
+<html>
+    <head>
+        <title>API for RESTful Web Service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css" /> 
+    </head>
+    <body>
+        <h2>RESTful Web Service API</h2>
+        <p><a href="index.html">Go Back to Home Page</a></p>
+        
+        <p>REST is an acronym for Representational State Transfer (see: 
+            <a href="http://en.wikipedia.org/wiki/REST">http://en.wikipedia.org/wiki/REST</a>. 
+            This means that all interaction from client to server is via normal
+            HTTP methods: GET, POST, PUT, PATCH, DELETE and URIs 
+            (Universal Resource Identifiers) that
+            represent the data access methodology. All data payloads to and 
+            from the server are in JSON format. In the API details below, 
+            replace "localhost:8080" with the actual server and port used.
+        </p>
+        
+        <table border="1">
+            <tr>
+                <td colspan="2" class="apiHead">Retrieve All Hotel Records</td>
+            </tr>
+            <tr>
+                <td>HTTP Method: </td>
+                <td>GET</td>
+            </tr>
+            <tr>
+                <td>URI: </td>
+                <td>http://localhost:8080/hotels</td>
+            </tr>
+            <tr>
+                <td>Response Data Type: </td>
+                <td>application/json</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+<pre>
+     jgl-mac: curl http://localhost:8080/hotels
+
+        {
+          "_links" : {
+            "self" : {
+              "href" : "http://localhost:8080/hotels{?page,size,sort}",
+              "templated" : true
+            },
+            "search" : {
+              "href" : "http://localhost:8080/hotels/search"
+            }
+          },
+          "_embedded" : {
+            "hotels" : [ {
+              "city" : "Montreal",
+              "name" : "Ritz Carlton",
+              "address" : "1228 Sherbrooke St",
+              "zip" : "H3G1H6",
+              "_links" : {
+                "self" : {
+                  "href" : "http://localhost:8080/hotels/2"
+                }
+              }
+            }, {
+              "city" : "Atlanta",
+              "name" : "Marriott Courtyard",
+              "address" : "Tower Place, Buckhead",
+              "zip" : "30305",
+              "_links" : {
+                "self" : {
+                  "href" : "http://localhost:8080/hotels/9"
+                }
+              }
+            } ]
+          },
+          "page" : {
+            "size" : 20,
+            "totalElements" : 2,
+            "totalPages" : 1,
+            "number" : 0
+          }
+</pre>
+                </td>
+            </tr>
+         </table>
+        
+        <br><br>
+        
+        <table border="1">
+            <tr>
+                <td colspan="2" class="apiHead">Retrieve One Hotel Record By ID</td>
+            </tr>
+            <tr>
+                <td>HTTP Method: </td>
+                <td>GET</td>
+            </tr>
+            <tr>
+                <td>URI: </td>
+                <td>http://localhost:8080/hotels/2</td>
+            </tr>
+            <tr>
+                <td>Response Data Type: </td>
+                <td>application/json</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+<pre>
+     jgl-mac: curl http://localhost:8080/hotels/2
+
+        {
+        "city" : "Montreal",
+        "name" : "Ritz Carlton",
+        "address" : "1228 Sherbrooke St",
+        "zip" : "H3G1H6",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/hotels/2"
+          }
+        }
+</pre>
+                </td>
+            </tr>
+         </table>        
+        
+        <br><br>
+        
+        <table border="1">
+            <tr>
+                <td colspan="2" class="apiHead">Create New Hotel Record</td>
+            </tr>
+            <tr>
+                <td>HTTP Method: </td>
+                <td>POST</td>
+            </tr>
+            <tr>
+                <td>URI: </td>
+                <td>http://localhost:8080/hotels</td>
+            </tr>
+            <tr>
+                <td>Request Payload Content Type: </td>
+                <td>application/json</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+<pre>
+     jgl-mac: curl -i -X POST -H "Content-Type:application/json" -d '{  "address" : "1234 Street",  "city" : "Chicago", "name" : "Best Western", "zip" : "60612" }' http://localhost:8080/hotels
+
+        HTTP/1.1 201 Created
+        Server: Apache-Coyote/1.1
+        Location: http://localhost:8080/hotels/12
+        Content-Length: 0
+        Date: Mon, 28 Apr 2014 14:52:37 GMT
+</pre>
+                </td>
+            </tr>
+         </table>       
+        
+        <br><br>
+        
+        <table border="1">
+            <tr>
+                <td colspan="2" class="apiHead">Update Hotel Record By ID</td>
+            </tr>
+            <tr>
+                <td>HTTP Method: </td>
+                <td>PATCH</td>
+            </tr>
+            <tr>
+                <td>URI: </td>
+                <td>http://localhost:8080/hotels/12</td>
+            </tr>
+            <tr>
+                <td>Request Payload Content Type: </td>
+                <td>application/json</td>
+            </tr>
+            <tr>
+                <td>Response Payload Data Type: </td>
+                <td>html (nothing actually comes back)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+<pre>
+     jgl-mac: curl -i -X PATCH -H "Content-Type:application/json" -d '{  "address" : "444 Street",  "city" : "Chicago", "name" : "Best Western", "zip" : "60612" }' http://localhost:8080/hotels/12
+
+        HTTP/1.1 204 No Content
+        Server: Apache-Coyote/1.1
+        Date: Mon, 28 Apr 2014 14:56:44 GMT
+</pre>
+                </td>
+            </tr>
+         </table>         
+        
+        <br><br>
+        
+        <table border="1">
+            <tr>
+                <td colspan="2" class="apiHead">Delete Hotel Record By ID</td>
+            </tr>
+            <tr>
+                <td>HTTP Method: </td>
+                <td>DELETE</td>
+            </tr>
+            <tr>
+                <td>URI: </td>
+                <td>http://localhost:8080/hotels/12</td>
+            </tr>
+            <tr>
+                <td>Response Payload Data Type: </td>
+                <td>html (nothing actually comes back)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+<pre>
+     jgl-mac: curl -X DELETE http://localhost:8080/hotels/12
+
+     (no response)
+</pre>
+                </td>
+            </tr>
+         </table>           
+    </body>
+</html>
