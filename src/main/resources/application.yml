@@ -1,0 +1,15 @@
+server:
+    port: 8080
+---
+
+spring:
+    profiles: client
+server:
+    port: 9000
+
+---
+
+spring:
+    profiles: production
+server:
+    port: 80
