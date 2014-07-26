@@ -3,9 +3,9 @@ server:
 ---
 
 spring:
-    profiles: client
+    profiles: development
 server:
-    port: 9000
+    port: 8080
 
 ---
 
