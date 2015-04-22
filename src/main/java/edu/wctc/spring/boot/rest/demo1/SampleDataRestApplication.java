@@ -7,13 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
+import javax.servlet.Filter;
 
 /**
- * This is how Spring Boot starts an application, in this case a
- * web application that uses Spring Data and JPA to automatically create
- * all the C.R.U.D. operations and map them to RESTful endpoints. See
- * the HotelRepository class under the service package.
- * 
+ * This is how Spring Boot starts an application, in this case a web application
+ * that uses Spring Data and JPA to automatically create all the C.R.U.D.
+ * operations and map them to RESTful endpoints. See the HotelRepository class
+ * under the service package.
+ *
  * @author Jim Lombardo
  */
 @Configuration
@@ -23,8 +26,12 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 @EnableAutoConfiguration
 public class SampleDataRestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SampleDataRestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SampleDataRestApplication.class, args);
+    }
 
+    @Bean
+    public Filter etagFilter() {
+        return new ShallowEtagHeaderFilter();
+    }
 }
